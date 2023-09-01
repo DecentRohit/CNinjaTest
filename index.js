@@ -2,9 +2,13 @@ let sec = 00;
 let min = 00;
 let hr = 00;
 let intervalAdd;
+let isRunning = false;
 
 // start timer function
 function startTimer() {
+  if (isRunning) {
+    return;
+  }
   intervalAdd = setInterval(() => {
     sec++;
 
@@ -39,14 +43,16 @@ function startTimer() {
       document.getElementById("second").innerHTML = sec;
     }
   }, 1000);
+  isRunning = !isRunning;
 }
 
 // for stopping the timer 
 function stopTimer() {
   clearInterval(intervalAdd);
+  isRunning = false;
 }
 
-//for resetting timer function
+//for resetting timer 
 function resetTimer() {
   clearInterval(intervalAdd);
   min = 00;
@@ -55,4 +61,5 @@ function resetTimer() {
   document.getElementById("second").innerHTML = sec + "0";
   hr = 00;
   document.getElementById("hour").innerHTML = hr + "0";
+  isRunning = false;
 }
